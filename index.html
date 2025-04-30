@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create and download your own digital business card with customizable templates">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data: https://via.placeholder.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src https://cdnjs.cloudflare.com data:;">
+    <title>Digital Business Card Generator</title>
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Load HTML2Canvas from CDN with error handling -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fallback for CSS -->
+    <noscript>
+        <style>
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            .app-container {
+                display: flex;
+                flex-direction: column;
+            }
+
+            @media (min-width: 768px) {
+                .app-container {
+                    flex-direction: row;
+                }
+            }
+
+            /* Basic styling fallback */
+        </style>
+    </noscript>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-id-card"></i> Digital Business Card Generator</h1>
+        </header>
+
+        <main class="app-container">
+            <section class="form-section">
+                <h2><i class="fas fa-user-edit"></i> Your Information</h2>
+
+                <form id="card-form" novalidate>
+                    <div class="form-group">
+                        <label for="full-name"><i class="fas fa-user"></i> Full Name <span class="required">*</span></label>
+                        <input type="text" id="full-name" placeholder="John Doe" required aria-required="true">
+                        <div class="error-message" id="full-name-error" aria-live="polite"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="job-title"><i class="fas fa-briefcase"></i> Job Title</label>
+                        <input type="text" id="job-title" placeholder="Software Developer">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company"><i class="fas fa-building"></i> Company Name</label>
+                        <input type="text" id="company" placeholder="Tech Corp Inc.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone-alt"></i> Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" placeholder="+1 (555) 123-4567" pattern="\+?[0-9\s\(\)-]{10,}"
+                            title="Please enter a valid phone number" aria-required="true">
+                        <div class="error-message" id="phone-error" aria-live="polite"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="email" placeholder="john@example.com">
+                        <div class="error-message" id="email-error" aria-live="polite"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="website"><i class="fas fa-globe"></i> Website or LinkedIn</label>
+                        <input type="url" id="website" placeholder="https://linkedin.com/in/johndoe">
+                        <div class="error-message" id="website-error" aria-live="polite"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="social-media"><i class="fas fa-share-alt"></i> Social Media</label>
+                        <div class="social-media-inputs">
+                            <div class="social-input">
+                                <span class="social-icon"><i class="fab fa-twitter"></i></span>
+                                <input type="text" id="twitter" placeholder="Twitter username">
+                            </div>
+                            <div class="social-input">
+                                <span class="social-icon"><i class="fab fa-instagram"></i></span>
+                                <input type="text" id="instagram" placeholder="Instagram username">
+                            </div>
+                            <div class="social-input">
+                                <span class="social-icon"><i class="fab fa-github"></i></span>
+                                <input type="text" id="github" placeholder="GitHub username">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-pic"><i class="fas fa-image"></i> Profile Picture</label>
+                        <input type="file" id="profile-pic" accept="image/jpeg, image/png, image/gif"
+                            aria-describedby="profile-pic-help">
+                        <small id="profile-pic-help" class="form-text">
+                            <i class="fas fa-info-circle"></i> Recommended size: 150x150 pixels. Max file size: 2MB.
+                        </small>
+                        <div class="error-message" id="profile-pic-error" aria-live="polite"></div>
+                    </div>
+
+                    <fieldset>
+                        <legend><i class="fas fa-paint-brush"></i> Appearance</legend>
+                        <div class="form-group">
+                            <label for="color-scheme"><i class="fas fa-palette"></i> Color Scheme</label>
+                            <select id="color-scheme">
+                                <option value="classic">Classic Blue</option>
+                                <option value="modern">Modern Red</option>
+                                <option value="minimal">Minimal Gray</option>
+                                <option value="custom">Custom Colors</option>
+                            </select>
+                        </div>
+
+                        <div id="custom-colors" class="hidden">
+                            <div class="form-group">
+                                <label for="primary-color"><i class="fas fa-fill-drip"></i> Primary Color</label>
+                                <input type="color" id="primary-color" value="#0066cc">
+                            </div>
+                            <div class="form-group">
+                                <label for="secondary-color"><i class="fas fa-fill"></i> Secondary Color</label>
+                                <input type="color" id="secondary-color" value="#ffffff">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="template"><i class="fas fa-th-large"></i> Template</label>
+                            <select id="template">
+                                <option value="template1">Template 1 - Standard</option>
+                                <option value="template2">Template 2 - Modern</option>
+                                <option value="template3">Template 3 - Minimal</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dark-mode" class="checkbox-label">
+                                <input type="checkbox" id="dark-mode">
+                                <span><i class="fas fa-moon"></i> Dark Mode</span>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-actions">
+                        <button type="button" id="generate-btn" class="btn primary-btn">
+                            <i class="fas fa-magic"></i> Generate Card
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="preview-section">
+                <h2><i class="fas fa-eye"></i> Live Preview</h2>
+                <div id="card-preview" class="card template1" aria-live="polite">
+                    <div class="card-content">
+                        <div class="profile-pic-container">
+                            <img id="preview-profile-pic" src="./assets/default-avatar.png" alt="Profile picture"
+                                onerror="this.src='https://via.placeholder.com/150?text=Photo'">
+                        </div>
+                        <div class="card-info">
+                            <h3 id="preview-name">Your Name</h3>
+                            <p id="preview-title" class="title">Job Title</p>
+                            <p id="preview-company">Company Name</p>
+                            <div class="contact-info">
+                                <p id="preview-phone">
+                                    <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                                    <span>+1 (123) 456-7890</span>
+                                </p>
+                                <p id="preview-email">
+                                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                                    <span>your@email.com</span>
+                                </p>
+                                <p id="preview-website">
+                                    <i class="fas fa-globe" aria-hidden="true"></i>
+                                    <span>example.com</span>
+                                </p>
+                                <div id="preview-social" class="social-links">
+                                    <a href="#" id="preview-twitter" class="social-link">
+                                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="#" id="preview-instagram" class="social-link">
+                                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="#" id="preview-github" class="social-link">
+                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-actions">
+                    <button type="button" id="download-btn" class="btn secondary-btn" disabled>
+                        <i class="fas fa-download" aria-hidden="true"></i>
+                        Download Card
+                    </button>
+                    <button type="button" id="save-btn" class="btn secondary-btn" disabled>
+                        <i class="fas fa-save" aria-hidden="true"></i>
+                        Save Design
+                    </button>
+                    <button type="button" id="reset-btn" class="btn tertiary-btn">
+                        <i class="fas fa-undo" aria-hidden="true"></i>
+                        Reset
+                    </button>
+                </div>
+
+                <div id="status-message" class="status-message" aria-live="polite"></div>
+
+                <div id="saved-designs" class="saved-designs hidden">
+                    <h3><i class="fas fa-bookmark"></i> Saved Designs</h3>
+                    <div class="designs-container"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p><i class="far fa-copyright"></i> <span id="current-year">2025</span> Digital Business Card Generator. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p><i class="fas fa-cog fa-spin"></i> Processing...</p>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div id="qr-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h3><i class="fas fa-qrcode"></i> Your Business Card QR Code</h3>
+            <div id="qr-code-container"></div>
+            <p>Scan this QR code to share your contact information</p>
+            <button id="download-qr" class="btn primary-btn">
+                <i class="fas fa-download"></i> Download QR Code
+            </button>
+        </div>
+    </div>
+
+    <!-- Error handling for HTML2Canvas -->
+    <script>
+        window.addEventListener('error', function (e) {
+            if (e.message.includes('html2canvas')) {
+                document.getElementById('status-message').textContent =
+                    'Error loading card generator. Please refresh the page or try again later.';
+                document.getElementById('status-message').classList.add('error');
+            }
+        });
+
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>

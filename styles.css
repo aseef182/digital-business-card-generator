@@ -1,0 +1,1470 @@
+/**
+ * Digital Business Card Generator - Updated Stylesheet
+ * Includes all improvements for better UX, accessibility, and visual design
+ * With fixes for color schemes and social icons
+ */
+
+/* ----------------- CSS Variables ----------------- */
+:root {
+    /* Color scheme */
+    --primary-color: #0066cc;
+    --secondary-color: #ffffff;
+    --text-color: #333333;
+    --light-text: #ffffff;
+    --light-gray: #f5f5f5;
+    --medium-gray: #e0e0e0;
+    --dark-gray: #888888;
+    --error-color: #e74c3c;
+    --success-color: #2ecc71;
+    --border-color: #dddddd;
+    --dark-bg: #121212;
+    --dark-card-bg: #1e1e1e;
+    --focus-ring: 0 0 0 3px rgba(0, 102, 204, 0.3);
+
+    /* Size variables */
+    --border-radius: 6px;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+
+    /* Font families */
+    --body-font: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --heading-font: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* ----------------- Global Styles ----------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-gray);
+    min-height: 100vh;
+    transition: background-color var(--transition-speed);
+}
+
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--heading-font);
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: var(--light-text);
+}
+
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Improved focus styles for keyboard navigation */
+a:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: 2px;
+}
+
+small {
+    font-size: 0.85rem;
+    color: var(--dark-gray);
+}
+
+/* ----------------- Layout Components ----------------- */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+@media screen and (min-width: 768px) {
+    .app-container {
+        flex-direction: row;
+        align-items: flex-start; /* Keep items aligned at the top */
+    }
+
+    .form-section {
+        flex: 1;
+        max-width: 50%;
+        position: sticky; /* Make form sticky for better usability */
+        top: 1rem;
+    }
+
+    .preview-section {
+        flex: 1;
+        max-width: 50%;
+    }
+}
+
+header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+header h1 {
+    color: var(--primary-color);
+}
+
+footer {
+    margin-top: 3rem;
+    padding: 1rem 0;
+    text-align: center;
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+}
+
+body.dark-mode footer {
+    border-top-color: #444;
+}
+
+/* ----------------- Form Styles ----------------- */
+.form-section {
+    background-color: var(--secondary-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: background-color var(--transition-speed);
+}
+
+body.dark-mode .form-section {
+    background-color: var(--dark-card-bg);
+    color: var(--light-text);
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+body.dark-mode label {
+    color: var(--light-text);
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-family: var(--body-font);
+    font-size: 1rem;
+    transition: all var(--transition-speed);
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: #2d2d2d;
+    color: var(--light-text);
+    border-color: #444;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: var(--focus-ring);
+}
+
+/* Focus visible for keyboard users */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: var(--focus-ring);
+}
+
+input[type="file"] {
+    padding: 0.5rem 0;
+    border: none;
+}
+
+input[type="color"] {
+    height: 40px;
+    padding: 0.25rem;
+    cursor: pointer;
+}
+
+.required {
+    color: var(--error-color);
+    margin-left: 0.25rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    /* Increased size for better touch targets */
+    min-width: 16px;
+    min-height: 16px;
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+/* Form validation states */
+input:invalid {
+    border-color: var(--error-color);
+}
+
+input:valid:not(:placeholder-shown) {
+    border-color: var(--success-color);
+}
+
+/* Social Media Inputs */
+.social-media-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.social-input {
+    display: flex;
+    align-items: center;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--light-gray);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+body.dark-mode .social-icon {
+    background-color: #2d2d2d;
+    border-color: #444;
+}
+
+.social-input input {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    border-left: none;
+}
+
+/* Form Actions */
+.form-actions {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+fieldset {
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+}
+
+body.dark-mode fieldset {
+    border-color: #444;
+}
+
+legend {
+    font-weight: 500;
+    padding: 0 0.5rem;
+}
+
+body.dark-mode legend {
+    color: var(--light-text);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Form helper text */
+.form-text {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--dark-gray);
+}
+
+body.dark-mode .form-text {
+    color: #aaa;
+}
+
+/* Profile picture error */
+.profile-pic-error {
+    color: var(--error-color);
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+/* ----------------- Business Card Preview ----------------- */
+.preview-section {
+    background-color: var(--secondary-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: background-color var(--transition-speed);
+}
+
+body.dark-mode .preview-section {
+    background-color: var(--dark-card-bg);
+}
+
+/* ----------------- Business Card Color Schemes Fix ----------------- */
+/* Default card variables */
+.card {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    aspect-ratio: 16/9;
+    margin: 0 auto 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    background-color: var(--secondary-color);
+    position: relative;
+    /* Default colors will be overridden by specific schemes */
+    --card-primary: #0066cc;
+    --card-secondary: #ffffff;
+    transition: all var(--transition-speed);
+}
+
+/* Color schemes should override the card's variables */
+.card.classic {
+    --card-primary: #0066cc;
+    --card-secondary: #ffffff;
+}
+
+.card.modern {
+    --card-primary: #e74c3c;
+    --card-secondary: #ffffff;
+}
+
+.card.minimal {
+    --card-primary: #607d8b;
+    --card-secondary: #f5f5f5;
+}
+
+.card.custom {
+    /* These will be set via JavaScript */
+    --card-primary: var(--user-primary, #0066cc);
+    --card-secondary: var(--user-secondary, #ffffff);
+}
+
+/* Apply color scheme with more specific selectors instead of !important */
+/* This provides same specificity as before but without !important */
+.card .profile-pic-container,
+.card .social-link {
+    background-color: var(--card-primary);
+}
+
+.card-content {
+    display: flex;
+    height: 100%;
+}
+
+/* Template 1 - Standard */
+.template1 .card-content {
+    flex-direction: row;
+}
+
+.template1 .profile-pic-container {
+    width: 35%;
+    height: 100%;
+    background-color: var(--card-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.template1 .card-info {
+    width: 65%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--card-secondary);
+}
+
+/* Template 2 - Modern */
+.template2 .card-content {
+    flex-direction: column;
+}
+
+.template2 .profile-pic-container {
+    height: 35%;
+    width: 100%;
+    background-color: var(--card-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+}
+
+.template2 .card-info {
+    height: 65%;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    background-color: var(--card-secondary);
+}
+
+.template2 .contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.template2 .contact-info p {
+    margin: 0.25rem;
+}
+
+/* Template 3 - Minimal */
+.template3 .card-content {
+    position: relative;
+    flex-direction: row;
+    background-color: var(--card-secondary);
+}
+
+.template3 .profile-pic-container {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: var(--card-secondary);
+}
+
+.template3 .card-info {
+    width: 70%;
+    padding: 1rem;
+    border-left: 3px solid var(--card-primary);
+    background-color: var(--card-secondary);
+}
+
+.template3 h3 {
+    color: var(--card-primary);
+}
+
+/* Profile Picture */
+.profile-pic-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.template1 .profile-pic-container img {
+    max-width: 100px;
+    max-height: 100px;
+    border: 3px solid var(--card-secondary);
+}
+
+.template2 .profile-pic-container img {
+    max-width: 80px;
+    max-height: 80px;
+    border: 3px solid var(--card-secondary);
+    margin-top: -20px;
+}
+
+.template3 .profile-pic-container img {
+    max-width: 80px;
+    max-height: 80px;
+    border: 2px solid var(--card-primary);
+}
+
+/* Card Info */
+.card-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+body.dark-mode .card-info h3 {
+    color: var(--light-text);
+}
+
+.card-info .title {
+    color: var(--card-primary);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.card-info p {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+body.dark-mode .card-info p {
+    color: #e0e0e0;
+}
+
+.contact-info {
+    margin-top: 0.75rem;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-info i {
+    color: var(--card-primary);
+    width: 1rem;
+    text-align: center;
+}
+
+/* ----------------- Social Icons Fix ----------------- */
+/* Ensure social icons are always visible and properly styled */
+.social-links {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: var(--card-primary);
+    color: white;
+    transition: all var(--transition-speed);
+}
+
+/* Make sure social links have proper contrast */
+.social-link i {
+    color: white;
+    font-size: 1rem;
+}
+
+.social-link:hover {
+    transform: scale(1.1);
+    background-color: #0055aa;
+    text-decoration: none;
+}
+
+/* Fixed focus state for keyboard navigation */
+.social-link:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    transform: scale(1.1);
+}
+
+/* Fix for template-specific social icon positions */
+.template1 .social-links {
+    justify-content: flex-start;
+}
+
+.template2 .social-links {
+    justify-content: center;
+}
+
+.template3 .social-links {
+    justify-content: flex-start;
+}
+
+/* Fixed social links visibility logic */
+/* Hide social links only when there's no username */
+.social-link[href=""],
+.social-link[href="#"],
+.social-link:not([href]) {
+    display: none;
+}
+
+/* Dark Mode */
+.card.dark-mode {
+    --card-primary: #2d3e50;
+    --card-secondary: #1a1a1a;
+    color: #e0e0e0;
+}
+
+.card.dark-mode .card-info h3,
+.card.dark-mode .card-info p {
+    color: #e0e0e0;
+}
+
+.card.dark-mode .title {
+    color: #4ca1ff;
+}
+
+.card.dark-mode .contact-info i {
+    color: #4ca1ff;
+}
+
+.card.dark-mode .social-link {
+    background-color: var(--card-primary);
+}
+
+.card.dark-mode .social-link:hover {
+    background-color: #0055aa;
+}
+
+/* Preview Actions */
+.preview-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+/* ----------------- Buttons ----------------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+/* Better focus states for keyboard navigation */
+.btn:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+.btn i {
+    font-size: 0.9rem;
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.primary-btn:hover {
+    background-color: #0055aa;
+}
+
+.primary-btn:disabled {
+    background-color: var(--dark-gray);
+}
+
+.secondary-btn {
+    background-color: var(--light-gray);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+body.dark-mode .secondary-btn {
+    background-color: #2d2d2d;
+    border-color: #444;
+    color: var(--light-text);
+}
+
+.secondary-btn:hover {
+    background-color: var(--medium-gray);
+}
+
+body.dark-mode .secondary-btn:hover {
+    background-color: #3d3d3d;
+}
+
+.tertiary-btn {
+    background-color: transparent;
+    color: var(--dark-gray);
+    padding: 0.75rem 1rem;
+}
+
+.tertiary-btn:hover {
+    color: var(--text-color);
+    background-color: var(--light-gray);
+}
+
+body.dark-mode .tertiary-btn:hover {
+    background-color: #2d2d2d;
+    color: var(--light-text);
+}
+
+.small-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+}
+
+/* ----------------- Status Messages ----------------- */
+.status-message {
+    margin: 1rem 0;
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: opacity var(--transition-speed);
+}
+
+.status-message:empty {
+    display: none;
+}
+
+.status-message.success {
+    background-color: rgba(46, 204, 113, 0.15);
+    color: #27ae60;
+    border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.status-message.error {
+    background-color: rgba(231, 76, 60, 0.15);
+    color: #c0392b;
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+body.dark-mode .status-message.success {
+    background-color: rgba(46, 204, 113, 0.25);
+    border-color: rgba(46, 204, 113, 0.4);
+}
+
+body.dark-mode .status-message.error {
+    background-color: rgba(231, 76, 60, 0.25);
+    border-color: rgba(231, 76, 60, 0.4);
+}
+
+/* ----------------- Saved Designs ----------------- */
+.saved-designs {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+body.dark-mode .saved-designs {
+    border-top-color: #444;
+}
+
+.saved-designs h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.designs-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.saved-design-card {
+    background-color: var(--light-gray);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    transition: all var(--transition-speed);
+}
+
+body.dark-mode .saved-design-card {
+    background-color: #2d2d2d;
+    border-color: #444;
+}
+
+.saved-design-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.saved-design-card h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+body.dark-mode .saved-design-card h4 {
+    color: var(--light-text);
+}
+
+.saved-design-card p {
+    color: var(--dark-gray);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+body.dark-mode .saved-design-card p {
+    color: #aaa;
+}
+
+.saved-design-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* ----------------- Loading Overlay ----------------- */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    color: white;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-left: 4px solid white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+.loading-overlay p {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ----------------- Modal Styles ----------------- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background-color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 350px;
+    text-align: center;
+    position: relative;
+}
+
+body.dark-mode .modal-content {
+    background-color: var(--dark-card-bg);
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: var(--dark-gray);
+    transition: color var(--transition-speed);
+}
+
+.close-modal:hover {
+    color: var(--text-color);
+}
+
+.close-modal:focus-visible {
+    outline: none;
+    color: var(--text-color);
+    box-shadow: var(--focus-ring);
+    border-radius: 2px;
+}
+
+body.dark-mode .close-modal:hover,
+body.dark-mode .close-modal:focus-visible {
+    color: var(--light-text);
+}
+
+/* QR Code Container */
+#qr-code-container {
+    margin: 1.5rem auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: var(--border-radius);
+    max-width: 200px;
+}
+
+#download-qr {
+    margin-top: 1rem;
+}
+
+/* ----------------- Responsive Adjustments ----------------- */
+@media screen and (max-width: 992px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.35rem;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .form-section,
+    .preview-section {
+        max-width: 100%;
+    }
+
+    .card {
+        margin-top: 1.5rem;
+    }
+
+    .preview-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .designs-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .form-section,
+    .preview-section {
+        padding: 1rem;
+    }
+
+    .designs-container {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        max-width: 100%;
+        aspect-ratio: 16/10; /* Better mobile ratio */
+    }
+
+    /* Improved mobile card layouts */
+    .template1 .card-content {
+        flex-direction: column;
+    }
+
+    .template1 .profile-pic-container {
+        width: 100%;
+        height: 40%;
+        padding: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .template1 .card-info {
+        width: 100%;
+        height: 60%;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .template3 .card-content {
+        flex-direction: column;
+    }
+
+    .template3 .profile-pic-container {
+        width: 100%;
+        height: 40%;
+        padding: 0.75rem;
+    }
+
+    .template3 .card-info {
+        width: 100%;
+        height: 60%;
+        padding: 1rem;
+        border-left: none;
+        border-top: 3px solid var(--card-primary);
+    }
+
+    /* Adjust font sizes for mobile */
+    .card-info h3 {
+        font-size: 1.1rem;
+    }
+
+    .card-info p {
+        font-size: 0.8rem;
+    }
+
+    /* Better social links spacing for mobile */
+    .social-links {
+        justify-content: center;
+    }
+}
+
+/* ----------------- Accessibility Improvements ----------------- */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+    .card {
+        border: 2px solid CanvasText;
+    }
+
+    .social-link {
+        border: 1px solid CanvasText;
+    }
+
+    .btn {
+        border: 1px solid CanvasText;
+    }
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .btn:hover,
+    .saved-design-card:hover,
+    .social-link:hover {
+        transform: none !important;
+    }
+}
+
+/* ----------------- Dark Mode Toggle ----------------- */
+/* Note: The HTML uses checkbox for dark mode toggle instead of a floating button */
+#dark-mode {
+    cursor: pointer;
+}
+
+/* This ensures the dark mode checkbox is properly aligned with its label */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+/* ----------------- Color Picker Styles ----------------- */
+.color-picker-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.color-picker-wrapper {
+    flex: 1;
+}
+
+.color-preview {
+    width: 100%;
+    height: 30px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    margin-top: 0.25rem;
+}
+
+/* ----------------- Animation and Transitions ----------------- */
+/* Fade in animation for card */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.4s ease-out;
+}
+
+/* Toast notification */
+.toast {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.75rem 1.5rem;
+    background-color: var(--dark-gray);
+    color: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: fadeInUp 0.3s, fadeOut 0.3s 2.7s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* ----------------- Print Styles ----------------- */
+@media print {
+    body {
+        background: white;
+    }
+
+    .container {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-section,
+    header h1,
+    footer,
+    .preview-actions,
+    .saved-designs,
+    .theme-toggle {
+        display: none;
+    }
+
+    .preview-section {
+        width: 100%;
+        max-width: none;
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+        background: none;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        box-shadow: none;
+        page-break-inside: avoid;
+    }
+}
+
+/* ----------------- Export Card Dialog ----------------- */
+.export-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.export-option {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+body.dark-mode .export-option {
+    border-color: #444;
+}
+
+.export-option:hover {
+    background-color: var(--light-gray);
+    transform: translateY(-2px);
+}
+
+body.dark-mode .export-option:hover {
+    background-color: #2d2d2d;
+}
+
+.export-option.selected {
+    border-color: var(--primary-color);
+    background-color: rgba(0, 102, 204, 0.1);
+}
+
+body.dark-mode .export-option.selected {
+    background-color: rgba(0, 102, 204, 0.2);
+}
+
+.export-option-icon {
+    margin-right: 1rem;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.export-option-text {
+    flex: 1;
+}
+
+.export-option-text h4 {
+    margin-bottom: 0.25rem;
+}
+
+.export-option-text p {
+    color: var(--dark-gray);
+    font-size: 0.85rem;
+}
+
+body.dark-mode .export-option-text p {
+    color: #aaa;
+}
+
+/* Share link input */
+.share-link-input {
+    display: flex;
+    margin: 1rem 0;
+}
+
+.share-link-input input {
+    flex: 1;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.share-link-input button {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+/* ----------------- Tooltip ----------------- */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.8rem;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* ----------------- QR Code Modal Specific Styles ----------------- */
+/* The HTML has a QR code modal, adding specific styling for it */
+#qr-modal .modal-content {
+    text-align: center;
+}
+
+#qr-code-container {
+    margin: 1.5rem auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: var(--border-radius);
+    max-width: 200px;
+}
+
+#download-qr {
+    margin-top: 1rem;
+}
+
+/* ----------------- File Drop Area ----------------- */
+.file-drop-area {
+    border: 2px dashed var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    transition: all var(--transition-speed);
+    cursor: pointer;
+}
+
+body.dark-mode .file-drop-area {
+    border-color: #444;
+}
+
+.file-drop-area.drag-over {
+    background-color: rgba(0, 102, 204, 0.1);
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .file-drop-area.drag-over {
+    background-color: rgba(0, 102, 204, 0.2);
+}
+
+.file-drop-area i {
+    font-size: 2rem;
+    color: var(--dark-gray);
+    margin-bottom: 0.75rem;
+}
+
+.file-drop-area p {
+    margin-bottom: 0.5rem;
+    color: var(--dark-gray);
+}
+
+.file-drop-area .btn {
+    margin-top: 1rem;
+}
+
+/* Utility classes for quick adjustments */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 {
+    margin-top: 0.5rem;
+}
+
+.mt-2 {
+    margin-top: 1rem;
+}
+
+.mt-3 {
+    margin-top: 1.5rem;
+}
+
+.mb-1 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-2 {
+    margin-bottom: 1rem;
+}
+
+.mb-3 {
+    margin-bottom: 1.5rem;
+}
